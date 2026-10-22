@@ -21,13 +21,15 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deploy on Vercel
 
-1. Push this repo to GitHub
-2. [Import the project on Vercel](https://vercel.com/new)
+**Live:** [stickerinator.vercel.app](https://stickerinator.vercel.app)
+
+1. Push this repo to GitHub ([AvoCahDoe/stickerinator](https://github.com/AvoCahDoe/stickerinator))
+2. [Import the project on Vercel](https://vercel.com/new) (or `npx vercel`)
 3. Framework: **Next.js** (root = repository root)
 4. Deploy — no env vars required for IMG.LY (models load in the browser)
 
 ```bash
-npx vercel
+npx vercel --prod
 ```
 
 ## Stack

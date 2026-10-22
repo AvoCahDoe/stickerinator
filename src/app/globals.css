@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0c1412;
+  --ink-soft: #15201c;
+  --panel: rgba(18, 32, 28, 0.72);
+  --line: rgba(214, 232, 220, 0.12);
+  --fog: #d7e8df;
+  --mist: #9bb5a8;
+  --citrus: #e8ff6b;
+  --coral: #ff6b4a;
+  --glow: rgba(232, 255, 107, 0.18);
+  --checker-a: #1a2a24;
+  --checker-b: #12201b;
+  --background: var(--ink);
+  --foreground: var(--fog);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-fog: var(--fog);
+  --color-mist: var(--mist);
+  --color-citrus: var(--citrus);
+  --color-coral: var(--coral);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: var(--fog);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(232, 255, 107, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(255, 107, 74, 0.1), transparent 50%),
+    linear-gradient(165deg, #0a100e 0%, #101a16 45%, #0c1412 100%);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.checker {
+  background-color: var(--checker-a);
+  background-image:
+    linear-gradient(45deg, var(--checker-b) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--checker-b) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--checker-b) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--checker-b) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 var(--glow);
+  }
+  70% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.55s ease-out both;
+}
+
+.btn-pulse:active {
+  animation: pulse-ring 0.45s ease-out;
+}
+
+input[type="range"] {
+  accent-color: var(--citrus);
+}
+
+input[type="color"] {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 8px;
+  width: 2.5rem;
+  height: 2rem;
+  padding: 0;
+  cursor: pointer;
 }
